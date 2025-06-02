@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>22011439 최하은 Frame Animation</title>
+    <script>
+      window.onload = function () {
+        let count = 0;
+        let image = document.getElementById("image");
+        let frames = [
+            "/images/pink_jump_001.png",
+            "/images/pink_jump_002.png",
+            "/images/pink_jump_003.png",
+            "/images/pink_jump_004.png",
+            "/images/pink_jump_005.png",
+            "/images/pink_jump_006.png",
+            "/images/pink_jump_007.png",
+            "/images/pink_jump_008.png"
+        ];
+
+        setInterval(function() {
+          image.src = frames[count % frames.length];
+          count++;
+        }, 1000/20);
+      };
+    </script>
+  </head>
+  <body>
+    <img id="image">
+  </body>
+</html>

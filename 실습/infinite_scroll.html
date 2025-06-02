@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>22011439 최하은</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>    
+    <script>
+      $(document).ready(function () {
+        let appendDocument = function () {
+          for (var i = 0; i < 20; i++) {
+            $('<h1>Infinity Scroll</h1>').appendTo('body');
+          }
+        };
+        appendDocument();
+
+        $(window).scroll(function () {
+          let scrollHeight = $(window).scrollTop() + $(window).height();
+          let documentHeight = $(document).height();
+
+          if (scrollHeight >= documentHeight) {
+            appendDocument();
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

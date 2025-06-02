@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>22011439 최하은-JQuery</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      let output = '';
+      for (let i = 0; i < 256; i++) {
+        output += '<div></div>';
+      }
+      document.body.innerHTML = output;
+      $('div').css({
+        height: 2,
+        backgroundColor: function (i) {
+          return 'rgb(' + i + ',' + i + ',' + i + ')';
+        }
+      })
+    })
+  </script>
+</head>
+
+<body>
+</body>
+</html>

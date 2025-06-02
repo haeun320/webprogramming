@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>22011439 최하은</title>
+    <style>
+      div.item:nth-child(1){background: blueviolet;}
+      div.item:nth-child(2){background: pink;}
+      div.item:nth-child(3){background: burlywood;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>    
+    <script>
+      $(document).ready(function () {
+        // 전역 변수로 선언
+        let width = parseInt($('[data-role="slider"]').attr('data-width'));
+        let height = parseInt($('[data-role="slider"]').attr('data-height'));
+        let count = $('[data-role="slider"] div.item').length;
+        let currentPage = 0;
+
+        // 슬라이더 스타일 설정
+        $('[data-role="slider"]').css({
+          position: 'relative',
+          overflow: 'hidden',
+          width: width + 'px',
+          height: height + 'px'
+        }).find('.container').css({
+          position: 'absolute',
+          width: (count * width) + 'px',
+          height: height + 'px',
+          left: '0px', // 초기 위치 설정
+          overflow: 'hidden'
+        }).find('.item').css({
+          width: width + 'px',
+          height: height + 'px',
+          float: 'left'
+        });
+
+        // 페이지 변경 함수
+        let changePage = function () {
+          $('[data-role="slider"] > .container').animate({
+            left: (-currentPage * width) + 'px' // 단위 추가
+          }, 500);
+        };
+
+        // 버튼 이벤트
+        $('#left-button').click(function () {
+          if (currentPage > 0) {
+            currentPage--;
+            changePage();
+          }
+        });
+
+        $('#right-button').click(function () {
+          if (currentPage < count - 1) {
+            currentPage++;
+            changePage();
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div data-role="slider" data-width="500" data-height="300">
+      <div class="container">
+        <div class="item">
+          <h1>22011439 최하은</h1>
+          <p>이곳은 슬라이더의 첫 번째 페이지입니다.</p>
+        </div>
+        <div class="item">
+          <h1>슬라이더 페이지 2</h1>
+          <p>이곳은 슬라이더의 두 번째 페이지입니다.</p>
+        </div> 
+        <div class="item">
+          <h1>슬라이더 페이지 3</h1>
+          <p>이곳은 슬라이더의 세 번째 페이지입니다.</p>
+        </div>
+      </div>
+    </div>
+    <button id="left-button">←</button>
+    <button id="right-button">→</button>
+  </body>
+</html>

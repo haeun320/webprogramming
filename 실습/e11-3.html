@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>22011439 최하은-JQuery</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // 스타일 속성 변경
+      $('h1').css('color', 'red');
+      $('h1').css('background', 'black')
+    });
+
+    $(document).ready(function() {
+      $('img').attr({
+        alt: 'jQuery 라이브러리를 사용한 속성 지정',
+        src: function (index) {
+          let size = (index + 1) * 100;
+          return 'https://placehold.co/' + size + 'x100';
+        },
+        width: function(index) {
+          return (index + 1) * 100;
+        },
+        height: 100
+      })
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Header</h1>
+  <h1>Header</h1>
+  <h1>Header</h1>
+  
+  <img data-index="0">
+  <img data-index="1">
+  <img data-index="2">
+</body>
+</html>
