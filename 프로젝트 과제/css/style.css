@@ -207,6 +207,57 @@ body.dark-mode .choice-btn:hover .choice-image {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  position: relative; /* 상대 위치 설정 */
+}
+
+/* 결과 팝업 컨테이너 */
+.result-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* 팝업 표시 상태 */
+.result-popup.show {
+  opacity: 1;
+  visibility: visible;
+  animation: popupBounce 0.5s ease-out;
+}
+
+/* 팝업 애니메이션 */
+@keyframes popupBounce {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* 팝업 사라지는 애니메이션 */
+.result-popup.hide {
+  animation: popupFadeOut 0.3s ease-in forwards;
+}
+
+@keyframes popupFadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
 }
 .vs-text {
   font-size: 2em;
@@ -218,9 +269,9 @@ body.dark-mode .choice-btn:hover .choice-image {
 /* 결과 메시지 */
 .result-message {
   background: white;
-  padding: 15px;
+  padding: 15px 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   font-weight: bold;
   color: #333;
   min-height: 50px;
@@ -228,6 +279,8 @@ body.dark-mode .choice-btn:hover .choice-image {
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: 1.1em;
+  min-width: 200px;
 }
 .result-win {
   background: linear-gradient(135deg, #4caf50, #45a049) !important;

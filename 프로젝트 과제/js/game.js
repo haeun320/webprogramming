@@ -56,16 +56,13 @@ function determineWinner(playerChoice, computerChoice) {
  * @returns {string} 결과 메시지
  */
 function getResultMessage(result, playerChoice, computerChoice) {
-  const playerName = CHOICES[playerChoice].name;
-  const computerName = CHOICES[computerChoice].name;
-
   switch (result) {
     case GAME_RESULTS.WIN:
-      return `🎉 승리! ${playerName}이(가) ${computerName}을(를) 이겼습니다!`;
+      return '🎉 승리!';
     case GAME_RESULTS.LOSE:
-      return `😢 패배! ${computerName}이(가) ${playerName}을(를) 이겼습니다!`;
+      return '😢 패배!';
     case GAME_RESULTS.DRAW:
-      return `🤝 무승부! 둘 다 ${playerName}을(를) 선택했습니다!`;
+      return '🤝 무승부!';
     default:
       return '알 수 없는 결과입니다.';
   }

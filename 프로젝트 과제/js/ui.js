@@ -229,10 +229,11 @@ function animateComputerChoice(choice) {
 }
 
 /**
- * 게임 결과 표시
+ * 게임 결과를 팝업으로 표시
  * @param {object} gameResult - 게임 결과 객체
  */
 function displayGameResult(gameResult) {
+  const $resultPopup = $('#resultPopup');
   const $resultMessage = $('#resultMessage');
 
   // 이전 결과 클래스 제거
@@ -244,8 +245,27 @@ function displayGameResult(gameResult) {
   // 결과 메시지 표시
   $resultMessage.text(gameResult.message);
 
-  // 결과 영역 애니메이션
-  $resultMessage.hide().fadeIn(500);
+  // 팝업 표시 애니메이션
+  $resultPopup.removeClass('hide').addClass('show');
+
+  // 0.8초 후 자동으로 사라지게 설정
+  setTimeout(() => {
+    hideResultPopup();
+  }, 800);
+}
+
+/**
+ * 결과 팝업 숨기기
+ */
+function hideResultPopup() {
+  const $resultPopup = $('#resultPopup');
+
+  $resultPopup.removeClass('show').addClass('hide');
+
+  // 애니메이션 완료 후 클래스 정리
+  setTimeout(() => {
+    $resultPopup.removeClass('hide');
+  }, 300);
 }
 
 /**
@@ -414,10 +434,8 @@ function resetGameDisplay() {
   $('#computerChoiceIcon').show().text('❓');
   $('#computerChoice .choice-text').text('대기 중');
 
-  // 결과 메시지 초기화
-  const $resultMessage = $('#resultMessage');
-  $resultMessage.removeClass('result-win result-lose result-draw');
-  $resultMessage.text('게임을 시작하세요!');
+  // 결과 팝업 숨기기
+  hideResultPopup();
 }
 
 /**
