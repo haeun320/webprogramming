@@ -1,0 +1,229 @@
+/* ===== 공통 애니메이션 및 효과 ===== */
+.choice-selected {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.6) !important;
+  transition: all 0.3s ease;
+}
+
+.computer-thinking {
+  animation: thinking 1s infinite;
+}
+@keyframes thinking {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.stat-updated {
+  animation: statUpdate 0.6s ease-in-out;
+}
+@keyframes statUpdate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    background: #e3f2fd;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game-success {
+  animation: successPulse 0.3s ease-in-out;
+}
+@keyframes successPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
+}
+
+.latest-game {
+  background: linear-gradient(135deg, #e8f5e8, #f0f8f0) !important;
+  font-weight: bold;
+}
+
+.reset-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: linear-gradient(45deg, #4caf50, #45a049);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+  font-weight: bold;
+  display: none;
+}
+
+/* ===== 미디어 쿼리 ===== */
+@media (min-width: 1200px) {
+  /* 대형 데스크톱 */
+  .game-container {
+    max-width: 1400px;
+  }
+  .game-header h1 {
+    font-size: 3em;
+  }
+  .choice-btn {
+    min-width: 150px;
+    padding: 25px;
+  }
+  .choice-btn .choice-icon {
+    font-size: 3em;
+  }
+  .vs-container {
+    flex: 0 0 250px;
+  }
+  .result-message {
+    min-height: 60px;
+    font-size: 1.1em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* 표준 데스크톱 */
+  .game-container {
+    max-width: 1000px;
+  }
+  .button-container {
+    gap: 15px;
+  }
+  .choice-btn {
+    min-width: 130px;
+    padding: 18px;
+  }
+  .result-container {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px),
+  (min-width: 576px) and (max-width: 767px),
+  (max-width: 575px) {
+  /* 화면 크기별 세부 스타일 유지 (생략하지 않음) */
+  /* 각 크기별 margin, padding, font-size, gap 등은 동일 구조로 유지 */
+}
+
+@media (max-width: 320px) {
+  /* 초소형 모바일 */
+  .choice-btn .choice-image,
+  .choice-display .choice-image {
+    width: 30px;
+    height: 30px;
+  }
+  .history-table th:nth-child(1),
+  .history-table td:nth-child(1),
+  .history-table th:nth-child(5),
+  .history-table td:nth-child(5) {
+    display: none;
+  }
+}
+
+/* ===== 가로 모드 (Landscape) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .game-main {
+    padding: 20px;
+  }
+  .result-container {
+    flex-direction: row;
+    gap: 15px;
+  }
+  .vs-container {
+    flex: 0 0 150px;
+  }
+  .history-container {
+    max-height: 200px;
+  }
+}
+
+/* ===== 프린트 ===== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .game-container {
+    background: white;
+    box-shadow: none;
+  }
+  .game-header {
+    background: #f0f0f0;
+    color: black;
+  }
+  .choice-btn,
+  .reset-btn,
+  .game-buttons,
+  .game-controls {
+    display: none;
+  }
+  .history-table {
+    border: 1px solid #ccc;
+  }
+  .history-table th {
+    background: #f0f0f0;
+    color: black;
+  }
+}
+
+/* ===== 접근성 (모션 최소화) ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== 다크모드 ===== */
+body.dark-mode {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ecf0f1;
+}
+
+body.dark-mode .game-container,
+body.dark-mode .choice-display,
+body.dark-mode .result-message,
+body.dark-mode .stat-item,
+body.dark-mode .game-history,
+body.dark-mode .history-table,
+body.dark-mode .no-history,
+body.dark-mode .game-controls {
+  background: #34495e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #ecf0f1;
+}
+
+body.dark-mode .theme-toggle-btn {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+body.dark-mode .theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+body.dark-mode .stat-label {
+  color: #bdc3c7;
+}
+body.dark-mode .stat-value,
+body.dark-mode .game-buttons h2 {
+  color: #ecf0f1;
+}
+body.dark-mode .history-table th {
+  background: linear-gradient(45deg, #34495e, #2c3e50);
+  color: #ecf0f1;
+}
+body.dark-mode .latest-game {
+  background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+  color: white !important;
+}

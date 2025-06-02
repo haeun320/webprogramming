@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보 게임</title>
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <!-- jQuery 라이브러리 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <!-- 게임 컨테이너 -->
+    <div class="game-container">
+      <!-- 게임 제목 -->
+      <header class="game-header">
+        <div class="header-top">
+          <div class="header-content">
+            <h1>🎮 가위바위보 게임</h1>
+            <p>컴퓨터와 가위바위보 승부를 해보세요!</p>
+          </div>
+          <button class="theme-toggle-btn" id="themeToggle" title="다크모드 전환">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 게임 메인 영역 -->
+      <main class="game-main">
+        <!-- 게임 선택 버튼 영역 -->
+        <section class="game-buttons">
+          <h2>당신의 선택은?</h2>
+          <div class="button-container">
+            <button class="choice-btn" data-choice="scissors">
+              <img src="images/scissors.png" alt="가위" class="choice-image" />
+              <span class="choice-text">가위</span>
+            </button>
+            <button class="choice-btn" data-choice="rock">
+              <img src="images/rock.png" alt="바위" class="choice-image" />
+              <span class="choice-text">바위</span>
+            </button>
+            <button class="choice-btn" data-choice="paper">
+              <img src="images/paper.png" alt="보" class="choice-image" />
+              <span class="choice-text">보</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 게임 결과 표시 영역 -->
+        <section class="game-result" id="gameResult">
+          <div class="result-container">
+            <div class="player-choice">
+              <h3>플레이어</h3>
+              <div class="choice-display" id="playerChoice">
+                <img
+                  src=""
+                  alt="선택하세요"
+                  class="choice-image"
+                  id="playerChoiceImage"
+                  style="display: none"
+                />
+                <span class="choice-icon" id="playerChoiceIcon">❓</span>
+                <span class="choice-text">선택하세요</span>
+              </div>
+            </div>
+
+            <div class="vs-container">
+              <span class="vs-text">VS</span>
+              <div class="result-message" id="resultMessage">게임을 시작하세요!</div>
+            </div>
+
+            <div class="computer-choice">
+              <h3>컴퓨터</h3>
+              <div class="choice-display" id="computerChoice">
+                <img
+                  src=""
+                  alt="대기 중"
+                  class="choice-image"
+                  id="computerChoiceImage"
+                  style="display: none"
+                />
+                <span class="choice-icon" id="computerChoiceIcon">❓</span>
+                <span class="choice-text">대기 중</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 게임 통계 -->
+        <section class="game-stats">
+          <div class="stats-container">
+            <div class="stat-item">
+              <span class="stat-label">승리</span>
+              <span class="stat-value" id="winCount">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">무승부</span>
+              <span class="stat-value" id="drawCount">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">패배</span>
+              <span class="stat-value" id="loseCount">0</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- 최근 게임 결과 목록 -->
+      <section class="game-history">
+        <h2>최근 게임 결과</h2>
+        <div class="history-container">
+          <table class="history-table" id="historyTable">
+            <thead>
+              <tr>
+                <th>게임</th>
+                <th>플레이어</th>
+                <th>컴퓨터</th>
+                <th>결과</th>
+                <th>시간</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody">
+              <!-- 게임 결과가 동적으로 추가됩니다 -->
+            </tbody>
+          </table>
+          <div class="no-history" id="noHistory">
+            아직 게임 기록이 없습니다. 게임을 시작해보세요!
+          </div>
+        </div>
+      </section>
+
+      <!-- 게임 초기화 버튼 -->
+      <section class="game-controls">
+        <button class="reset-btn" id="resetGame">게임 기록 초기화</button>
+      </section>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="js/game.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+  </body>
+</html>
