@@ -521,7 +521,7 @@ body.dark-mode .choice-btn:hover .choice-image {
   padding: 20px;
 }
 
-/* 히스토리 헤더 스타일 */
+/* ===== 히스토리 헤더 스타일 ===== */
 .history-header {
   display: flex;
   justify-content: space-between;
