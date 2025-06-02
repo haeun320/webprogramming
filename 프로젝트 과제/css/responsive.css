@@ -186,17 +186,32 @@ body.dark-mode {
   color: #ecf0f1;
 }
 
+body.dark-mode .game-header,
+body.dark-mode .choice-btn {
+  background: linear-gradient(45deg, #144678, #3270ad);
+  color: #ecf0f1;
+}
+
+body.dark-mode .choice-btn,
+body.dark-mode .stat-item {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 body.dark-mode .game-container,
 body.dark-mode .choice-display,
 body.dark-mode .result-message,
-body.dark-mode .stat-item,
 body.dark-mode .game-history,
-body.dark-mode .history-table,
 body.dark-mode .no-history,
 body.dark-mode .game-controls {
   background: #34495e;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   color: #ecf0f1;
+}
+
+body.dark-mode .history-table,
+body.dark-mode .game-result,
+body.dark-mode .stat-item {
+  background: #283453;
 }
 
 body.dark-mode .theme-toggle-btn {
@@ -211,14 +226,19 @@ body.dark-mode .stat-label {
   color: #bdc3c7;
 }
 body.dark-mode .stat-value,
-body.dark-mode .game-buttons h2 {
+body.dark-mode .game-buttons h2,
+body.dark-mode .result-container h3,
+body.dark-mode .choice-text {
   color: #ecf0f1;
 }
 body.dark-mode .history-table th {
-  background: linear-gradient(45deg, #34495e, #2c3e50);
+  background: linear-gradient(45deg, #3248a9, #452267);
   color: #ecf0f1;
 }
 body.dark-mode .latest-game {
-  background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+  background: linear-gradient(45deg, #769876, #496049) !important;
   color: white !important;
+}
+body.dark-mode .history-table tbody tr:hover {
+  background: #1c1954;
 }
