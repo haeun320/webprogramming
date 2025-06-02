@@ -114,8 +114,7 @@ function saveGameResult(gameResult) {
   // 업데이트된 통계 저장
   saveGameStats(currentStats);
 
-  // 현재 전체 기록 로드
-  let allHistory = loadGameHistory();
+  let allHistory = loadAllGameHistory();
 
   // 게임 번호 추가
   const gameNumber = currentStats.totalGames;
