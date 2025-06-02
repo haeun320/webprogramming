@@ -155,19 +155,17 @@ function handlePlayerChoice(playerChoice) {
   // 선택 효과 애니메이션
   animatePlayerChoice(playerChoice);
 
-  // 컴퓨터 선택 애니메이션 (딜레이 후 실행)
+  // 컴퓨터 선택 애니메이션
+  animateComputerChoice(gameResult.computerChoice);
+
+  // 결과 표시 (추가 딜레이)
   setTimeout(() => {
-    animateComputerChoice(gameResult.computerChoice);
+    displayGameResult(gameResult);
+    saveAndUpdateUI(gameResult);
 
-    // 결과 표시 (추가 딜레이)
-    setTimeout(() => {
-      displayGameResult(gameResult);
-      saveAndUpdateUI(gameResult);
-
-      // 버튼 다시 활성화
-      $('.choice-btn').prop('disabled', false);
-    }, 800);
-  }, 500);
+    // 버튼 다시 활성화
+    $('.choice-btn').prop('disabled', false);
+  }, 1000);
 }
 
 /**
@@ -180,18 +178,27 @@ function animatePlayerChoice(choice) {
   const $playerChoiceImage = $('#playerChoiceImage');
   const $playerChoiceIcon = $('#playerChoiceIcon');
 
-  // 이미지로 선택 표시 업데이트
-  $playerChoiceImage.attr('src', choiceInfo.image);
-  $playerChoiceImage.attr('alt', choiceInfo.name);
-  $playerChoiceImage.show();
-  $playerChoiceIcon.hide();
-  $playerChoice.find('.choice-text').text(choiceInfo.name);
+  // 로딩 애니메이션
+  $playerChoice.addClass('computer-thinking');
+  $playerChoiceImage.hide();
+  $playerChoiceIcon.show();
+  $playerChoiceIcon.text('🤫');
+  $playerChoice.find('.choice-text').text('대기 중...');
 
-  // 선택 효과 애니메이션
-  $playerChoice.addClass('choice-selected');
   setTimeout(() => {
-    $playerChoice.removeClass('choice-selected');
-  }, 300);
+    $playerChoice.removeClass('computer-thinking');
+    $playerChoiceImage.attr('src', choiceInfo.image);
+    $playerChoiceImage.attr('alt', choiceInfo.name);
+    $playerChoiceImage.show();
+    $playerChoiceIcon.hide();
+    $playerChoice.find('.choice-text').text(choiceInfo.name);
+
+    // 컴퓨터 선택 효과
+    $playerChoice.addClass('choice-selected');
+    setTimeout(() => {
+      $playerChoice.removeClass('choice-selected');
+    }, 300);
+  }, 400);
 }
 
 /**
@@ -225,7 +232,7 @@ function animateComputerChoice(choice) {
     setTimeout(() => {
       $computerChoice.removeClass('choice-selected');
     }, 300);
-  }, 300);
+  }, 400);
 }
 
 /**
@@ -282,9 +289,6 @@ function saveAndUpdateUI(gameResult) {
 
     // 기록 업데이트
     updateHistoryDisplay(savedData.history);
-
-    // 성공 피드백
-    showSuccessFeedback();
   } else {
     console.error('게임 결과 저장에 실패했습니다.');
   }
@@ -317,6 +321,9 @@ function animateCounterUpdate(selector, targetValue) {
 
   // 값이 변경된 경우에만 애니메이션 실행
   if (currentValue !== targetValue) {
+    // 업데이트 효과를 즉시 적용
+    $element.parent().addClass('stat-updated');
+
     $({ counter: currentValue }).animate(
       { counter: targetValue },
       {
@@ -326,8 +333,7 @@ function animateCounterUpdate(selector, targetValue) {
         },
         complete: function () {
           $element.text(targetValue);
-          // 업데이트 효과
-          $element.parent().addClass('stat-updated');
+          // 애니메이션 종료 후 효과 제거
           setTimeout(() => {
             $element.parent().removeClass('stat-updated');
           }, 600);
@@ -436,17 +442,6 @@ function resetGameDisplay() {
 
   // 결과 팝업 숨기기
   hideResultPopup();
-}
-
-/**
- * 성공 피드백 표시
- */
-function showSuccessFeedback() {
-  // 간단한 성공 효과
-  $('body').addClass('game-success');
-  setTimeout(() => {
-    $('body').removeClass('game-success');
-  }, 300);
 }
 
 /**
