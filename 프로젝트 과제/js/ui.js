@@ -3,6 +3,9 @@
  * jQuery를 활용한 사용자 인터페이스 관리
  */
 
+// js-confetti 인스턴스 생성
+const jsConfetti = new JSConfetti();
+
 // 테마 관련 상수
 const THEME_STORAGE_KEY = 'rps_theme_mode';
 const THEMES = {
@@ -373,6 +376,11 @@ function displayGameResult(gameResult) {
   // 결과 메시지 표시
   $resultMessage.text(gameResult.message);
 
+  // 승리 시 컨페티 효과 실행
+  if (gameResult.result === 'win') {
+    showConfettiEffect();
+  }
+
   // 팝업 표시 애니메이션
   $resultPopup.removeClass('hide').addClass('show');
 
@@ -580,4 +588,27 @@ function showResetFeedback() {
     .fadeOut(300, function () {
       $(this).remove();
     });
+}
+
+/**
+ * 승리 시 컨페티 효과 표시 (js-confetti 라이브러리 사용)
+ */
+function showConfettiEffect() {
+  jsConfetti.addConfetti({
+    confettiColors: [
+      '#ff0a54',
+      '#ff7096',
+      '#fbb1bd',
+      '#a8e6cf',
+      '#dcedc8',
+      '#ffe600',
+      '#fd9644',
+      '#f8c291',
+      '#4fc3f7',
+      '#1976d2',
+      '#00bcd4',
+    ],
+    confettiRadius: 6,
+    confettiNumber: 150,
+  });
 }
