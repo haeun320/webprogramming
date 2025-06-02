@@ -1,0 +1,661 @@
+/* ===== 공통 애니메이션 및 효과 ===== */
+.choice-selected {
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.6);
+  animation: choiceSelected 3s ease-out;
+}
+@keyframes choiceSelected {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: none;
+  }
+}
+
+.computer-thinking {
+  animation: thinking 1s infinite;
+}
+@keyframes thinking {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.stat-updated {
+  animation: statUpdate 0.6s ease-in-out;
+}
+@keyframes statUpdate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+    background: #e3f2fd;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.latest-game {
+  background: linear-gradient(135deg, #e8f5e8, #f0f8f0) !important;
+  font-weight: bold;
+}
+
+.reset-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: linear-gradient(45deg, #4caf50, #45a049);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+  font-weight: bold;
+  display: none;
+}
+
+/* ===== 미디어 쿼리 ===== */
+@media (min-width: 1200px) {
+  /* 대형 데스크톱 */
+  .game-container {
+    max-width: 1400px;
+  }
+  .game-header h1 {
+    font-size: 3em;
+  }
+  .choice-btn {
+    min-width: 150px;
+    padding: 25px;
+  }
+  .choice-btn .choice-icon {
+    font-size: 3em;
+  }
+  .vs-container {
+    flex: 0 0 250px;
+  }
+  .result-message {
+    min-height: 60px;
+    font-size: 1.1em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* 표준 데스크톱 */
+  .game-container {
+    max-width: 1000px;
+  }
+  .button-container {
+    gap: 15px;
+  }
+  .choice-btn {
+    min-width: 130px;
+    padding: 18px;
+  }
+  .result-container {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* 태블릿 */
+  .game-container {
+    margin: 10px;
+  }
+  .game-header {
+    padding: 25px;
+  }
+  .game-header h1 {
+    font-size: 2.2em;
+  }
+  .game-main {
+    padding: 30px;
+  }
+  .button-container {
+    gap: 15px;
+  }
+  .choice-btn {
+    min-width: 110px;
+    padding: 15px;
+  }
+  .choice-btn .choice-image {
+    width: 50px;
+    height: 50px;
+  }
+  .result-container {
+    gap: 15px;
+  }
+  .vs-container {
+    flex: 0 0 180px;
+  }
+  .stats-container {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  /* 작은 태블릿 / 큰 모바일 */
+  body {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .game-container {
+    border-radius: 15px;
+    margin: 0;
+  }
+  .game-header {
+    padding: 20px;
+  }
+  .game-header h1 {
+    font-size: 1.8em;
+  }
+  .game-header p {
+    font-size: 1em;
+  }
+  .game-main {
+    padding: 25px;
+  }
+  .game-buttons h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  .button-container {
+    gap: 10px;
+  }
+  .choice-btn {
+    min-width: 90px;
+    padding: 12px;
+  }
+  .choice-btn .choice-image {
+    width: 40px;
+    height: 40px;
+  }
+  .choice-btn .choice-text {
+    font-size: 1em;
+  }
+
+  /* 결과 표시 영역 세로 정렬 */
+  .result-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .player-choice,
+  .computer-choice {
+    flex: none;
+  }
+  .vs-container {
+    flex: none;
+    order: 1;
+  }
+  .player-choice {
+    order: 0;
+  }
+  .computer-choice {
+    order: 2;
+  }
+  .choice-display {
+    height: 120px;
+    padding: 15px;
+    width: 250px;
+  }
+  .choice-display .choice-image {
+    width: 60px;
+    height: 60px;
+  }
+  .choice-display .choice-icon {
+    font-size: 2.5em;
+  }
+  .vs-text {
+    font-size: 2em;
+  }
+
+  /* 통계 카드 한 줄 정렬 */
+  .stats-container {
+    gap: 15px;
+  }
+  .stat-item {
+    padding: 15px 10px;
+    min-width: 80px;
+    flex: 1;
+  }
+  .stat-value {
+    font-size: 1.5em;
+  }
+  .stat-label {
+    font-size: 0.8em;
+  }
+
+  /* 게임 기록 테이블 가로 스크롤 */
+  .history-container {
+    overflow-x: auto;
+    max-height: 300px;
+  }
+  .history-table {
+    min-width: 500px;
+  }
+  .history-table th,
+  .history-table td {
+    padding: 10px 8px;
+    font-size: 0.9em;
+  }
+
+  .game-history {
+    padding: 20px;
+  }
+  .game-history h2 {
+    font-size: 1.4em;
+  }
+  .game-controls {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 575px) {
+  /* 모바일 */
+  body {
+    padding: 5px;
+    font-size: 13px;
+  }
+  .game-container {
+    border-radius: 10px;
+  }
+
+  /* 헤더 */
+  .header-top {
+    flex-direction: row;
+    align-items: center;
+  }
+  .game-header {
+    padding: 15px;
+  }
+  .game-header h1 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+  .game-header p {
+    font-size: 0.9em;
+  }
+  .theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .theme-icon {
+    font-size: 1.2em;
+  }
+
+  /* 메인 영역 */
+  .game-main {
+    padding: 20px;
+  }
+  .game-buttons h2 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
+
+  /* 선택 버튼 - 한 줄에 3개 */
+  .button-container {
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .choice-btn {
+    min-width: calc(33.333% - 6px);
+    padding: 10px 5px;
+    flex: 1;
+  }
+  .choice-btn .choice-image {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 5px;
+  }
+  .choice-btn .choice-text {
+    font-size: 0.9em;
+  }
+
+  /* 결과 표시 영역 - 세로 정렬 */
+  .game-result {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .result-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .player-choice,
+  .computer-choice {
+    flex: none;
+  }
+  .player-choice h3,
+  .computer-choice h3 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+  .choice-display {
+    height: 100px;
+    padding: 10px;
+    width: 150px;
+  }
+  .choice-display .choice-image {
+    width: 50px;
+    height: 50px;
+  }
+  .choice-display .choice-icon {
+    font-size: 2em;
+  }
+  .choice-display .choice-text {
+    font-size: 1em;
+  }
+
+  /* VS 컨테이너 */
+  .vs-container {
+    flex: none;
+    order: 1;
+  }
+  .player-choice {
+    order: 0;
+  }
+  .computer-choice {
+    order: 2;
+  }
+  .vs-text {
+    font-size: 1.8em;
+  }
+  .result-message {
+    min-height: 40px;
+    font-size: 1em;
+    min-width: 150px;
+    padding: 10px 15px;
+  }
+
+  /* 통계 - 한 줄에 3개 */
+  .stats-container {
+    gap: 8px;
+  }
+  .stat-item {
+    padding: 12px 8px;
+    min-width: calc(33.333% - 6px);
+    flex: 1;
+  }
+  .stat-value {
+    font-size: 1.3em;
+  }
+  .stat-label {
+    font-size: 0.75em;
+  }
+
+  /* 게임 기록 */
+  .game-history {
+    padding: 15px;
+  }
+  .game-history h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  /* 테이블 가로 스크롤 */
+  .history-container {
+    overflow-x: auto;
+    max-height: 250px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .history-table {
+    min-width: 450px;
+  }
+  .history-table th,
+  .history-table td {
+    padding: 8px 6px;
+    font-size: 0.8em;
+    white-space: nowrap;
+  }
+  .history-table th:first-child,
+  .history-table td:first-child {
+    min-width: 50px;
+  }
+  .history-table th:nth-child(2),
+  .history-table td:nth-child(2),
+  .history-table th:nth-child(3),
+  .history-table td:nth-child(3) {
+    min-width: 80px;
+  }
+  .history-table th:nth-child(4),
+  .history-table td:nth-child(4) {
+    min-width: 60px;
+  }
+  .history-table th:last-child,
+  .history-table td:last-child {
+    min-width: 70px;
+  }
+
+  /* 전체 결과 보기 버튼 */
+  .view-all-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  /* 게임 컨트롤 */
+  .game-controls {
+    padding: 15px;
+  }
+  .reset-btn {
+    padding: 10px 25px;
+    font-size: 0.9em;
+  }
+
+  /* 모달 스타일 오버라이드 */
+  .modal-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+  .modal-header {
+    padding: 12px 15px;
+  }
+  .modal-header h2 {
+    font-size: 1.2em;
+  }
+  .all-history-container {
+    padding: 10px;
+    max-height: calc(85vh - 80px);
+  }
+}
+
+@media (max-width: 320px) {
+  /* 초소형 모바일 */
+  .choice-btn .choice-image,
+  .choice-display .choice-image {
+    width: 30px;
+    height: 30px;
+  }
+  .choice-btn .choice-text {
+    font-size: 0.8em;
+  }
+  .history-table th:nth-child(1),
+  .history-table td:nth-child(1),
+  .history-table th:nth-child(5),
+  .history-table td:nth-child(5) {
+    display: none;
+  }
+  .history-table {
+    min-width: 300px;
+  }
+}
+
+/* ===== 가로 모드 (Landscape) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .game-main {
+    padding: 20px;
+  }
+  .result-container {
+    flex-direction: row;
+    gap: 15px;
+  }
+  .vs-container {
+    flex: 0 0 150px;
+  }
+  .history-container {
+    max-height: 200px;
+  }
+}
+
+/* ===== 프린트 ===== */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .game-container {
+    background: white;
+    box-shadow: none;
+  }
+  .game-header {
+    background: #f0f0f0;
+    color: black;
+  }
+  .choice-btn,
+  .reset-btn,
+  .game-buttons,
+  .game-controls {
+    display: none;
+  }
+  .history-table {
+    border: 1px solid #ccc;
+  }
+  .history-table th {
+    background: #f0f0f0;
+    color: black;
+  }
+}
+
+/* ===== 접근성 (모션 최소화) ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== 모달 반응형 스타일 ===== */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 15px 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3em;
+  }
+
+  .history-header {
+    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .all-history-container {
+    max-height: calc(90vh - 120px);
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 98%;
+  }
+
+  .modal-header {
+    padding: 12px 15px;
+  }
+
+  .all-history-container {
+    padding: 10px;
+  }
+}
+
+/* ===== 다크모드 ===== */
+body.dark-mode {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ecf0f1;
+}
+
+body.dark-mode .game-header,
+body.dark-mode .choice-btn {
+  background: linear-gradient(45deg, #144678, #3270ad);
+  color: #ecf0f1;
+}
+
+body.dark-mode .choice-btn,
+body.dark-mode .stat-item {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .game-container,
+body.dark-mode .choice-display,
+body.dark-mode .result-message,
+body.dark-mode .game-history,
+body.dark-mode .no-history,
+body.dark-mode .game-controls {
+  background: #34495e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #ecf0f1;
+}
+
+body.dark-mode .history-table,
+body.dark-mode .game-result,
+body.dark-mode .stat-item {
+  background: #283453;
+}
+
+body.dark-mode .theme-toggle-btn {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+body.dark-mode .theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+body.dark-mode .stat-label {
+  color: #bdc3c7;
+}
+body.dark-mode .stat-value,
+body.dark-mode .game-buttons h2,
+body.dark-mode .result-container h3,
+body.dark-mode .choice-text {
+  color: #ecf0f1;
+}
+body.dark-mode .history-table th {
+  background: linear-gradient(45deg, #3248a9, #452267);
+  color: #ecf0f1;
+}
+body.dark-mode .latest-game {
+  background: linear-gradient(45deg, #769876, #496049) !important;
+  color: white !important;
+}
+body.dark-mode .history-table tbody tr:hover {
+  background: #1c1954;
+}
+
+/* ===== 다크모드 모달 스타일 ===== */
+body.dark-mode .modal-content {
+  background: #34495e;
+  color: #ecf0f1;
+}
+
+body.dark-mode .modal-header {
+  background: linear-gradient(45deg, #144678, #3270ad);
+  border-bottom-color: #2c3e50;
+}
+
+body.dark-mode .view-all-btn,
+body.dark-mode .all-history-container {
+  background: #34495e;
+  color: #ecf0f1;
+}
