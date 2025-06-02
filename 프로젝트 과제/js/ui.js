@@ -77,6 +77,15 @@ function setupEventListeners() {
       $(this).removeClass('btn-hover');
     }
   );
+
+  // 마우스 오버 시 툴팁 표시
+  $('#themeToggle')
+    .on('mouseenter', function () {
+      showCustomTooltip($(this));
+    })
+    .on('mouseleave', function () {
+      hideCustomTooltip($(this));
+    });
 }
 
 /**
@@ -99,6 +108,31 @@ function handleThemeToggle() {
   showThemeChangeFeedback(newTheme);
 
   console.log('테마가 변경되었습니다:', newTheme);
+}
+
+// 툴팁 생성 및 표시
+function showCustomTooltip($btn) {
+  let tooltip = $btn.find('.tooltip');
+  if (tooltip.length === 0) {
+    tooltip = $('<span class="tooltip"></span>');
+    $btn.append(tooltip);
+  }
+
+  // 현재 모드에 따라 텍스트 설정
+  const isDark = $('body').hasClass('dark-mode');
+  tooltip.text(isDark ? '라이트모드 전환' : '다크모드 전환');
+
+  tooltip.stop(true).animate({ opacity: 1 }, 200);
+}
+
+// 툴팁 숨기기
+function hideCustomTooltip($btn) {
+  const tooltip = $btn.find('.tooltip');
+  if (tooltip.length > 0) {
+    tooltip.stop(true).animate({ opacity: 0 }, 200, function () {
+      $(this).remove(); // 애니메이션 후 제거
+    });
+  }
 }
 
 /**

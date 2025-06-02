@@ -58,6 +58,7 @@ body {
 
 /* ===== 테마 토글 ===== */
 .theme-toggle-btn {
+  position: relative;
   background: rgba(255, 255, 255, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
@@ -84,6 +85,26 @@ body {
 }
 .theme-toggle-btn:hover .theme-icon {
   transform: rotate(20deg);
+}
+
+/* ===== 툴팁 스타일 ===== */
+.tooltip {
+  position: absolute;
+  bottom: 120%; /* 버튼 위쪽에 표시 */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  font-size: 11px;
+}
+.theme-toggle-btn:hover .tooltip {
+  opacity: 1;
 }
 
 /* ===== 게임 메인 ===== */
