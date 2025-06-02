@@ -56,25 +56,35 @@ function saveGameStats(stats) {
 }
 
 /**
- * 로컬스토리지에서 게임 기록 불러오기
- * @returns {array} 게임 기록 배열
+ * 전체 게임 기록 불러오기 (모달용)
+ * @returns {array} 전체 게임 기록 배열
  */
-function loadGameHistory() {
+function loadAllGameHistory() {
   try {
     const historyData = localStorage.getItem(STORAGE_KEYS.GAME_HISTORY);
     if (historyData) {
       const history = JSON.parse(historyData);
-      // 날짜 객체로 변환
+      // 날짜 객체로 변환하여 전체 기록 반환
       return history.map((game) => ({
         ...game,
         timestamp: new Date(game.timestamp),
       }));
     }
   } catch (error) {
-    console.error('게임 기록 로드 중 오류:', error);
+    console.error('전체 게임 기록 로드 중 오류:', error);
   }
 
   return [];
+}
+
+/**
+ * 로컬스토리지에서 게임 기록 불러오기
+ * @returns {array} 게임 기록 배열
+ */
+function loadGameHistory() {
+  // 전체 기록을 가져온 후 최근 5개만 반환
+  const allHistory = loadAllGameHistory();
+  return allHistory.slice(0, MAX_HISTORY_COUNT);
 }
 
 /**
@@ -104,8 +114,8 @@ function saveGameResult(gameResult) {
   // 업데이트된 통계 저장
   saveGameStats(currentStats);
 
-  // 현재 기록 로드
-  let currentHistory = loadGameHistory();
+  // 현재 전체 기록 로드
+  let allHistory = loadGameHistory();
 
   // 게임 번호 추가
   const gameNumber = currentStats.totalGames;
@@ -114,20 +124,18 @@ function saveGameResult(gameResult) {
     gameNumber: gameNumber,
   };
 
-  // 새 기록을 맨 앞에 추가
-  currentHistory.unshift(gameRecord);
+  // 새 기록을 맨 앞에 추가 (전체 기록에는 제한 없이 저장)
+  allHistory.unshift(gameRecord);
 
-  // 최대 기록 수를 초과하면 마지막 기록 제거
-  if (currentHistory.length > MAX_HISTORY_COUNT) {
-    currentHistory = currentHistory.slice(0, MAX_HISTORY_COUNT);
-  }
+  // 전체 기록 저장 (제한 없음)
+  saveGameHistory(allHistory);
 
-  // 업데이트된 기록 저장
-  saveGameHistory(currentHistory);
+  // 최근 5개 기록만 추출하여 반환
+  const recentHistory = allHistory.slice(0, MAX_HISTORY_COUNT);
 
   return {
     stats: currentStats,
-    history: currentHistory,
+    history: recentHistory, // UI 업데이트용으로는 최근 5개만 반환
   };
 }
 
@@ -213,17 +221,11 @@ function formatGameRecord(gameRecord) {
  */
 function calculateWinRate(stats) {
   if (stats.totalGames === 0) {
-    return {
-      winRate: 0,
-      winPercentage: '0%',
-    };
+    return '0%';
   }
 
   const winRate = stats.win / stats.totalGames;
-  const winPercentage = Math.round(winRate * 100) + '%';
+  const winPercentage = (winRate * 100).toFixed(2) + '%';
 
-  return {
-    winRate: winRate,
-    winPercentage: winPercentage,
-  };
+  return winPercentage;
 }

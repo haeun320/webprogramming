@@ -86,6 +86,30 @@ function setupEventListeners() {
     .on('mouseleave', function () {
       hideCustomTooltip($(this));
     });
+
+  // 전체 결과 보기 버튼 클릭 이벤트
+  $('#viewAllHistory').on('click', function () {
+    showAllHistoryModal();
+  });
+
+  // 모달 닫기 버튼 클릭 이벤트
+  $('#closeModal').on('click', function () {
+    hideAllHistoryModal();
+  });
+
+  // 모달 외부 클릭 시 닫기
+  $('#allHistoryModal').on('click', function (e) {
+    if (e.target === this) {
+      hideAllHistoryModal();
+    }
+  });
+
+  // ESC 키로 모달 닫기
+  $(document).on('keydown', function (e) {
+    if (e.key === 'Escape') {
+      hideAllHistoryModal();
+    }
+  });
 }
 
 /**
@@ -133,6 +157,69 @@ function hideCustomTooltip($btn) {
       $(this).remove(); // 애니메이션 후 제거
     });
   }
+}
+
+/**
+ * 전체 게임 기록 모달 표시
+ */
+function showAllHistoryModal() {
+  const allHistory = loadAllGameHistory();
+  updateAllHistoryDisplay(allHistory);
+
+  // 모달 표시
+  $('#allHistoryModal').addClass('show');
+
+  // 스크롤을 맨 위로
+  $('.all-history-container').scrollTop(0);
+
+  console.log('전체 게임 기록 모달이 표시되었습니다.');
+}
+
+/**
+ * 전체 게임 기록 모달 숨기기
+ */
+function hideAllHistoryModal() {
+  $('#allHistoryModal').removeClass('show');
+
+  console.log('전체 게임 기록 모달이 숨겨졌습니다.');
+}
+
+/**
+ * 전체 게임 기록 표시 업데이트
+ * @param {array} allHistory - 전체 게임 기록 배열
+ */
+function updateAllHistoryDisplay(allHistory) {
+  const $allHistoryBody = $('#allHistoryBody');
+  const $noAllHistory = $('#noAllHistory');
+  const $allHistoryTable = $('#allHistoryTable');
+
+  // 승률 표시
+  const stats = loadGameStats();
+  const winRate = calculateWinRate(stats);
+  $('#modalWinRate').text(`${stats.win}승 ${stats.draw}무 ${stats.lose}패 / 승률: ${winRate}`);
+
+  // 기록이 없는 경우
+  if (allHistory.length === 0) {
+    $allHistoryTable.hide();
+    $noAllHistory.show();
+    return;
+  }
+
+  // 기록이 있는 경우
+  $noAllHistory.hide();
+  $allHistoryTable.show();
+
+  // 테이블 내용 초기화
+  $allHistoryBody.empty();
+
+  // 각 기록을 테이블 행으로 추가 (역순으로 정렬하여 최신 기록이 위에 오도록)
+  allHistory.forEach((record, index) => {
+    const formattedRecord = formatGameRecord(record);
+    const $row = createHistoryRow(formattedRecord, index === 0);
+    $allHistoryBody.append($row);
+  });
+
+  console.log(`전체 게임 기록 ${allHistory.length}개가 표시되었습니다.`);
 }
 
 /**

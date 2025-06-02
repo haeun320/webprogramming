@@ -16,6 +16,40 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
+    <!-- 전체 게임 결과 모달 -->
+    <div class="modal-overlay" id="allHistoryModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>전체 게임 결과</h2>
+          <button class="modal-close-btn" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="all-history-container">
+            <div id="modalWinRate" class="modal-winrate"></div>
+
+            <table class="history-table" id="allHistoryTable">
+              <thead>
+                <tr>
+                  <th>게임</th>
+                  <th>플레이어</th>
+                  <th>컴퓨터</th>
+                  <th>결과</th>
+                  <th>시간</th>
+                </tr>
+              </thead>
+              <tbody id="allHistoryBody">
+                <!-- 전체 게임 결과가 동적으로 추가 -->
+              </tbody>
+            </table>
+            <div class="no-history" id="noAllHistory" style="display: none">
+              아직 게임 기록이 없습니다. 게임을 시작해보세요!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
     <!-- 게임 컨테이너 -->
     <div class="game-container">
       <!-- 게임 제목 -->
@@ -116,7 +150,11 @@
 
       <!-- 최근 게임 결과 목록 -->
       <section class="game-history">
-        <h2>최근 게임 결과</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <h2 style="margin: 0">최근 게임 결과</h2>
+          <button class="view-all-btn" id="viewAllHistory">전체 결과 보기 &gt;</button>
+        </div>
+
         <div class="history-container">
           <table class="history-table" id="historyTable">
             <thead>
@@ -129,7 +167,7 @@
               </tr>
             </thead>
             <tbody id="historyBody">
-              <!-- 게임 결과가 동적으로 추가됩니다 -->
+              <!-- 게임 결과가 동적으로 추가 -->
             </tbody>
           </table>
           <div class="no-history" id="noHistory">
